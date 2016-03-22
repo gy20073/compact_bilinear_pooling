@@ -1,50 +1,54 @@
 This is the bilinear pooling and compact bilinear pooling caffe implementation.
 The original implementation is in MatConvNet and for convenience, we port them to Caffe. 
 
-Sample layer prototxt:
+Sample layer prototxt: \
 Bilinear layer:
-layer {
-  name: "bilinear_layer"
-  type: "Bilinear"
-  bottom: "in1"
-  bottom: "in2"
-  top: "out"
-}
+
+    layer {
+      name: "bilinear_layer"
+      type: "Bilinear"
+      bottom: "in1"
+      bottom: "in2"
+      top: "out"
+    }
 
 compact bilinear layer:
-layer {
-  name: "compact_bilinear"
-  type: "CompactBilinear"
-  bottom: "in1"
-  bottom: "in2"
-  top: "out"
-  compact_bilinear_param {
-    num_output: 4096
-    sum_pool: false
-  }
-}
+
+    layer {
+      name: "compact_bilinear"
+      type: "CompactBilinear"
+      bottom: "in1"
+      bottom: "in2"
+      top: "out"
+      compact_bilinear_param {
+        num_output: 4096
+        sum_pool: false
+      }
+    }
 For convenience, we also implement the signed-sqrt layer and the (sample-wise) l2 normalization layer, as:
-layer {
-  name: "signed_sqrt_layer"
-  type: "SignedSqrt"
-  bottom: "in"
-  top: "out"
-}
+    
+    layer {
+      name: "signed_sqrt_layer"
+      type: "SignedSqrt"
+      bottom: "in"
+      top: "out"
+    }
 and
-layer {
-  name: "l2_normalization_layer"
-  type: "L2Normalization"
-  bottom: "in"
-  top: "out"
-}
-the usual use case are compact_bilinear + signed-sqrt + l2_normalization + classification. 
+
+    layer {
+      name: "l2_normalization_layer"
+      type: "L2Normalization"
+      bottom: "in"
+      top: "out"
+    }
+the usual use cases are compact_bilinear + signed-sqrt + l2_normalization + classification. 
 
 
 For both bilinear and compact bilinear layer, two inputs could be the same blob,
-i.e. in1==in2. But we always require two inputs. The two input sizes must be compatible with each other. "in1" and "in2" should have shapes: N*C1*H*W and N*C2*H*W respectively. Only the number of channels could be different. 
+i.e. in1==in2. But we always require two inputs. The two input sizes must be compatible with each other. "in1" and "in2" should have shapes: N\*C1\*H\*W and N\*C2\*H\*W respectively. Only the number of channels could be different. 
 
-The bilinear layer always output a blob with a shape of N*(C1*C2)*1*1, i.e. bilinear features 
-that is spatially sum pooled. The compact bilinear layer's output shape, on the other hand, depend on its compact_bilinear_param. In addition to the spatially sum pooled feature (output size N*num_output*1*1, we also allow the non-pooled feature (sum_pool: false, output size: N*num_output*H*W). This could be useful in the case where one needs some spatio resolution in the output, such as keypoint detection.
+The bilinear layer always output a blob with a shape of N\*(C1\*C2)\*1\*1, i.e. bilinear features 
+that is spatially sum pooled. The compact bilinear layer's output shape, on the other hand, depend on its compact_bilinear_param. In addition to the spatially sum pooled feature (output size N\*num\_output\*1\*1, we also allow the non-pooled feature (sum_pool: false, output size\: N\*num\_output\*H\*W). This could be useful in the case where one needs some spatio resolution in the output, such as keypoint detection.
 
 
 TODO list:
@@ -52,20 +56,22 @@ TODO list:
 
 
 If you find bilinear pooling or compact bilinear pooling, please consider citing:
-@inproceedings{lin2015bilinear,
-  title={Bilinear CNN models for fine-grained visual recognition},
-  author={Lin, Tsung-Yu and RoyChowdhury, Aruni and Maji, Subhransu},
-  booktitle={Proceedings of the IEEE International Conference on Computer Vision},
-  pages={1449--1457},
-  year={2015}
-}
+
+    @inproceedings{lin2015bilinear,
+      title={Bilinear CNN models for fine-grained visual recognition},
+      author={Lin, Tsung-Yu and RoyChowdhury, Aruni and Maji, Subhransu},
+      booktitle={Proceedings of the IEEE International Conference on Computer Vision},
+      pages={1449--1457},
+      year={2015}
+    }
 and
-@inproceedings{gao2016compact,
-  title={Compact Bilinear Pooling},
-  author={Gao, Yang and Beijbom, Oscar and Zhang, Ning and Darrell, Trevor},
-  booktitle={Computer Vision and Pattern Recognition (CVPR), 2016 IEEE Conference on},
-  year={2016}
-}
+
+    @inproceedings{gao2016compact,
+      title={Compact Bilinear Pooling},
+      author={Gao, Yang and Beijbom, Oscar and Zhang, Ning and Darrell, Trevor},
+      booktitle={Computer Vision and Pattern Recognition (CVPR), 2016 IEEE Conference on},
+      year={2016}
+    }
 
 
 
