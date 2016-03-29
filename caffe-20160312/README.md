@@ -12,7 +12,7 @@ Bilinear layer:
       top: "out"
     }
 
-compact bilinear layer:
+compact bilinear Tensor Sketch layer:
 
     layer {
       name: "compact_bilinear"
@@ -25,7 +25,8 @@ compact bilinear layer:
         sum_pool: false
       }
     }
-For convenience, we also implement the signed-sqrt layer and the (sample-wise) l2 normalization layer, as:
+
+We only implemented the compact bilinear Tensor Sketch version without learning the random weights, since it's the best in practice. For convenience, we also implement the signed-sqrt layer and the (sample-wise) l2 normalization layer, as:
     
     layer {
       name: "signed_sqrt_layer"

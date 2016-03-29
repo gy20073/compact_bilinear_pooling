@@ -37,13 +37,15 @@ saveInter=1;
 % batch size, usually VGG_M=32; VGG_16=8;
 batchSize=32;
 % set a reasonable learning rate
-learningRate=[ones(1, 100)*1E-3];
+learningRate=[ones(1, 200)*1E-3];
 % weightDecay: usually use the default value
 weightDecay=0.0005;
 %% change the options based on default values
 gpuId=1;
-tag='sample';
+tag='final_1';
 batchSize=32;
+mopts.poolType='fcfc';
+mopts.use448=false;
 run_one_experiment(dataset,network, gpuId, tag, saveInter,...
                        batchSize, learningRate, weightDecay, mopts);
 %% change the options based on default values

@@ -194,7 +194,7 @@ function net=addCompactTS(net, projDim, nc, learnW, dataset)
         % modify the initialized parameters to the loaded params 
         TS_obj.h_={hs(1,:), hs(2,:)};
         TS_obj.weights_={ss(1,:), ss(2,:)};
-        TS_obj.setSparseM(TS_obj.weights_);
+        TS_obj.setSparseM(TS_obj.weights_, 1);
     end
     
     net.layers{end+1}=struct('type', 'custom',...
