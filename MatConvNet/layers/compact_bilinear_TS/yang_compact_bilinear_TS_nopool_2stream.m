@@ -12,7 +12,7 @@ classdef yang_compact_bilinear_TS_nopool_2stream < dagnn.Pooling
         
         % batch size when doing the compact transform
         % mainly for saving memory when doing FFT
-        bsn=8
+        bsn=1
     end
 
     methods
