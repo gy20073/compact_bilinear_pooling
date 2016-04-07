@@ -21,6 +21,8 @@ function prepare_dataset(dataset)
         imdb=fmd_get_database(dataDir, 'seed', 1);
     elseif strcmp(dataset, 'DTD');
         imdb=dtd_get_database(dataDir, 'seed', 1);
+    elseif strcmp(dataset, 'MIT_Places')
+        imdb=mit_places_get_database(dataDir);
     else
         error('unknown dataset');
     end

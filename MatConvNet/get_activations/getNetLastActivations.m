@@ -5,6 +5,14 @@ function [activations, label_out]=getNetLastActivations...
         batchSize=128;
     end
     
+    % if net is larger than 100k, the downsample it to 10k
+    % mainly to be friendly to MIT Places dataset
+    if numel(batchIds) > 100000
+        batchIds=batchIds(randsample(numel(batchIds), 10000));
+        fprintf(['Warning: In getNetLastActivations, input batch too large',...
+                 ', downsampled to 10K']);
+    end
+    
     label_out=zeros(numel(batchIds),1);
     for i=1:ceil(numel(batchIds)/batchSize)
         fprintf('In getNetLastActivations, reading and get activations of batch %d\n',i);

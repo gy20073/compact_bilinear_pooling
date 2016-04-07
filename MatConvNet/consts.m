@@ -76,6 +76,9 @@ function out=consts(dataset, varName, varargin)
     elseif strcmp(dataset, 'DTD')
         dataDir=fullfile('data', 'dtd');
         num_classes=47;
+    elseif strcmp(dataset, 'MIT_Places')
+        dataDir=fullfile('data', 'mit_places');
+        num_classes=201;
     else
         error('dataset unknown')
     end

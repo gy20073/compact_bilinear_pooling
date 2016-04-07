@@ -127,7 +127,13 @@ for epoch=start+1:opts.numEpochs
 
   % train one epoch and validate
   learningRate = opts.learningRate(min(epoch, numel(opts.learningRate))) ;
-  train = opts.train(randperm(numel(opts.train))) ; % shuffle
+  
+  % do not permute now
+  %train = opts.train(randperm(numel(opts.train))) ; % shuffle
+  fprintf('warning: not shuffling now\n');
+  train=opts.train;
+  
+  
   val = opts.val ;
   if numGpus <= 1
     [net,stats.train] = process_epoch(opts, getBatch, epoch, train, learningRate, imdb, net) ;
