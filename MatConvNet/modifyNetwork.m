@@ -137,6 +137,8 @@ function net=modifyNetwork(network, dataset, varargin)
         % set learning rate of classification layer to 0
         net.layers{end-1}.learningRate=[0 0];
     end
+    
+    net=vl_simplenn_move(net, 'cpu');
 end
 
 %%%%%%%%%%%%%%%%%%%%%%% Various Layer Definition %%%%%%%%%%%%%%%%%%%%%%
