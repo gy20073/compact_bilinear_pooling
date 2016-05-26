@@ -31,8 +31,6 @@
 % could miss some of the local descriptors if the image size does not fits.
 % 2. error in q_{ik} on the webpage, but not in the code
 function out=yang_fv(X, varargin)
-    % debug
-    fprintf('in yang_fv\n')
 % This function don't do any form of sanity check
 % X is some input local features of size H x W x D x N
 %
@@ -187,9 +185,6 @@ function out=yang_fv(X, varargin)
     if onGPU
         out=gpuArray(out);
     end
-    
-    % debug
-    fprintf('out yang_fv\n');
 end
 
 function dzdx=backOne(x, uv, yx, param)

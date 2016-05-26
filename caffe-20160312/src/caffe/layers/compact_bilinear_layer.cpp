@@ -72,25 +72,23 @@ void CompactBilinearLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
         top_shape[2] = top_shape[3] = 1;
     top[0]->Reshape(top_shape);
 
-    if (randh_[0].count() == 0) {
-        // generate the random weights, this should be only executed once.
-        const int C[2] = { bottom[0]->shape(1), bottom[1]->shape(1) };
-        // use default C random number generator to fix randomness
-        srand(1);
-        for (int i = 0; i < 2; ++i) {
-            // fill randh_
-            randh_[i].Reshape(vector<int>(1, C[i]));
-            int* hdata = randh_[i].mutable_cpu_data();
-            randi(C[i], num_output_, hdata);
+    // generate the random weights, this should be only executed once.
+    const int C[2] = { bottom[0]->shape(1), bottom[1]->shape(1) };
+    // use default C random number generator to fix randomness
+    srand(1);
+    for (int i = 0; i < 2; ++i) {
+        // fill randh_
+        randh_[i].Reshape(vector<int>(1, C[i]));
+        int* hdata = randh_[i].mutable_cpu_data();
+        randi(C[i], num_output_, hdata);
 
-            // fill rands_
-            rands_[i].Reshape(vector<int>(1, C[i]));
-            Dtype* sdata = rands_[i].mutable_cpu_data();
-            randi(C[i], 2, sdata);
-            // and transform it from [0, 1] to [-1, 1]
-            for (int j = 0; j < C[i]; ++j)
-                sdata[j] = 2 * sdata[j] - 1;
-        }
+        // fill rands_
+        rands_[i].Reshape(vector<int>(1, C[i]));
+        Dtype* sdata = rands_[i].mutable_cpu_data();
+        randi(C[i], 2, sdata);
+        // and transform it from [0, 1] to [-1, 1]
+        for (int j = 0; j < C[i]; ++j)
+            sdata[j] = 2 * sdata[j] - 1;
     }
 }
 

@@ -32,7 +32,7 @@ gpuId=1;
 % tag to diffrentiate multiple versions of experiments. 
 tag='some_tag';
 % Save the trained model every saveIter epoches. Mainly for saving disk space.
-saveInter=1;
+saveInter=10;
 
 % batch size, usually VGG_M=32; VGG_16=8;
 batchSize=32;
@@ -88,3 +88,50 @@ mopts.poolType='fcfc';
 dataset='FMD';
 run_one_experiment(dataset,network, gpuId, tag, saveInter,...
                        batchSize, learningRate, weightDecay, mopts);
+%% test the "data doesn't exist on GPU problem"
+tag='data_dont_exist';
+mopts.use448=true;
+batchSize=8;
+network='VGG_16';
+
+gpuId=6;
+mopts.poolType='compact_bilinear';
+dataset='MIT';
+run_one_experiment(dataset,network, gpuId, tag, saveInter,...
+                       batchSize, learningRate, weightDecay, mopts); 
+%% rerun all experiments with 224 resolution
+% all possible exp configurations
+poolTypes = {'bilinear', 'fisher'};
+datasets = {'CUB', 'MIT', 'DTD'};
+networks = {'VGG_M', 'VGG_16'};
+% specify the task for this machine
+datasets = {'CUB'};
+networks = {'VGG_M'};
+gpuId = 3;
+tag = 'final_1';
+poolTypes = {'fcfc'};
+mopts.learnW = false;
+
+for ipool = 1 : numel(poolTypes)
+    for idataset = 1 : numel(datasets)
+        for inetwork = 1 : numel(networks)
+            mopts.poolType = poolTypes{ipool};
+            mopts.use448 = false;
+            dataset = datasets{idataset};
+            network = networks{inetwork};
+
+            if strcmp(network, 'VGG_M')
+                batchSize = 128;
+                learningRate = ones(1, 100) * 1e-3;
+            elseif strcmp(network, 'VGG_16')
+                batchSize = 32;
+                learningRate = ones(1, 30) * 1e-3;
+            else
+                error('unknown network type');
+            end
+
+            run_one_experiment(dataset,network, gpuId, tag, saveInter,...
+                               batchSize, learningRate, weightDecay, mopts);
+        end
+    end
+end               
