@@ -52,8 +52,7 @@ The bilinear layer always output a blob with a shape of N\*(C1\*C2)\*1\*1, i.e. 
 that is spatially sum pooled. The compact bilinear layer's output shape, on the other hand, depend on its compact_bilinear_param. In addition to the spatially sum pooled feature (output size N\*num\_output\*1\*1, we also allow the non-pooled feature (sum_pool: false, output size\: N\*num\_output\*H\*W). This could be useful in the case where one needs some spatio resolution in the output, such as keypoint detection.
 
 
-TODO list:
-1. make an example network prototxt on CUB dataset. 
+There is an example of using compact bilinear feature to do birds classification in folder: $CAFFE_ROOT/examples/compact_bilinear. Please check it out!
 
 
 If you find bilinear pooling or compact bilinear pooling, please consider citing:
