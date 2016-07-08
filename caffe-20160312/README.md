@@ -74,6 +74,7 @@ and
     }
 
 
+The compact bilinear pooling is licensed under BDD, although the original Caffe is licensed under BSD. Please refer to the LICENSE file in this folder for details.  
 
 
 
