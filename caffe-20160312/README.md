@@ -55,35 +55,35 @@ that is spatially sum pooled. The compact bilinear layer's output shape, on the 
 There is an example of using compact bilinear feature to do birds classification in folder: $CAFFE_ROOT/examples/compact_bilinear. Please check it out!
 
 If you want to merge the compact bilinear layer into your own caffe version, make sure you have changed all those files:
-cmake/Cuda.cmake
-  add ${CUDA_CUFFT_LIBRARIES} to Caffe_LINKER_LIBS
+    cmake/Cuda.cmake
+      add ${CUDA_CUFFT_LIBRARIES} to Caffe_LINKER_LIBS
 
-include/caffe/layers:
-  bilinear_layer.hpp
-  compact_bilinear_layer.hpp
-  l2_normalize_layer.hpp
-  signed_sqrt_layer.hpp
-and their corresponding .cu and .cpp files in src/caffe/layers. If you want to include their tests, they are located at src/caffe/test with names like test_compact_bilinear_layer.cpp.
+    include/caffe/layers:
+      bilinear_layer.hpp
+      compact_bilinear_layer.hpp
+      l2_normalize_layer.hpp
+      signed_sqrt_layer.hpp
+    and their corresponding .cu and .cpp files in src/caffe/layers. If you want to include their tests, they are located at src/caffe/test with names like test_compact_bilinear_layer.cpp.
 
-include/caffe/util:
-  _kiss_fft_guts.h
-  kiss_fft.h
-  kiss_fftr.h
-src/caffe/util
-  kiss_fft.cpp
-  kiss_fftr.cpp
+    include/caffe/util:
+      _kiss_fft_guts.h
+      kiss_fft.h
+      kiss_fftr.h
+    src/caffe/util
+      kiss_fft.cpp
+      kiss_fftr.cpp
 
-Makefile
-  change the line "LIBRARIES := cudart cublas curand" to "LIBRARIES := cudart cublas curand cufft".
+    Makefile
+      change the line "LIBRARIES := cudart cublas curand" to "LIBRARIES := cudart cublas curand cufft".
 
-src/caffe/proto/caffe.proto
-  add "optional CompactBilinearParameter compact_bilinear_param=145;" in the "message LayerParameter". 
+    src/caffe/proto/caffe.proto
+      add "optional CompactBilinearParameter compact_bilinear_param=145;" in the "message LayerParameter". 
 
-  add the following message:
-  message CompactBilinearParameter {
-   optional uint32 num_output = 1;
-   optional bool sum_pool = 2 [default = true]; 
- }
+      add the following message:
+      message CompactBilinearParameter {
+       optional uint32 num_output = 1;
+       optional bool sum_pool = 2 [default = true]; 
+     }
 
 
 
