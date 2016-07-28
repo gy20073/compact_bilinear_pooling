@@ -55,6 +55,7 @@ that is spatially sum pooled. The compact bilinear layer's output shape, on the 
 There is an example of using compact bilinear feature to do birds classification in folder: $CAFFE_ROOT/examples/compact_bilinear. Please check it out!
 
 If you want to merge the compact bilinear layer into your own caffe version, make sure you have changed all those files:
+
     cmake/Cuda.cmake
       add ${CUDA_CUFFT_LIBRARIES} to Caffe_LINKER_LIBS
 
@@ -63,7 +64,7 @@ If you want to merge the compact bilinear layer into your own caffe version, mak
       compact_bilinear_layer.hpp
       l2_normalize_layer.hpp
       signed_sqrt_layer.hpp
-    and their corresponding .cu and .cpp files in src/caffe/layers. If you want to include their tests, they are located at src/caffe/test with names like test_compact_bilinear_layer.cpp.
+    and their corresponding .cu and .cpp files in src/caffe/layers, and tests at src/caffe/test/.
 
     include/caffe/util:
       _kiss_fft_guts.h
