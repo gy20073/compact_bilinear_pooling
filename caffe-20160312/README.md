@@ -86,6 +86,7 @@ If you want to merge the compact bilinear layer into your own caffe version, mak
        optional bool sum_pool = 2 [default = true]; 
      }
 
+This version of Caffe only supports cudnn v4. To use compact bilinear pooling with the latest version of cudnn (v5 at the time of writing), you have to merge the files above to Caffe master branch. 
 
 
 If you find bilinear pooling or compact bilinear pooling useful, please consider citing:
