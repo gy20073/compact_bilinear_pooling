@@ -38,7 +38,7 @@ and
 
     layer {
       name: "l2_normalization_layer"
-      type: "L2Normalization"
+      type: "L2Normalize"
       bottom: "in"
       top: "out"
     }
