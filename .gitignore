@@ -2,6 +2,8 @@ caffe-20160312/.build_release
 caffe-20160312/build
 caffe-20160312/no_publish
 caffe-20160312/.ipynb_checkpoints/
+caffe-20160312/python/caffe/_caffe.so
+caffe-20160312/python/caffe/proto/
 
 MatConvNet/no_publish
 MatConvNet/vlfeat

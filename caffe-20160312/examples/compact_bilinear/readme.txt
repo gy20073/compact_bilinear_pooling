@@ -16,6 +16,6 @@ Usage:
 	./examples/compact_bilinear/ft_all.sh
 
 5. The fine tuned models are available at:
-	https://drive.google.com/open?id=0B0ldy05JZFSaS1pIUjBaSUxMTUU
+        https://drive.google.com/drive/folders/0B0ldy05JZFSaS1pIUjBaSUxMTUU?resourcekey=0-AH5joTLTj_qucwz-IFaTdA&usp=sharing
 
 Trained on cub200 with random cropping and achieve an accuracy of 84.98% 

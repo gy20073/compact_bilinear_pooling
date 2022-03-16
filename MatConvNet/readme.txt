@@ -8,6 +8,7 @@ CUB dataset
 MIT indoor dataset
 	We used the recommended subset of the MIT Indoor dataset. One could download the dataset directly from the official website, we also provide the subset we used. Simply download and unzip and you're all set. If you plan to start from the original dataset, you have to do some pre-processing to be compatible with our code. 
 	https://drive.google.com/file/d/0B0ldy05JZFSacmpPaTNrN0NSUjA/view?usp=sharing
+        Update 20220317: the above google drive link no longer works, you have to download from the original MIT source. 
 FMD dataset
 	http://people.csail.mit.edu/celiu/CVPR2010/FMD/FMD.zip
 DTD dataset 
